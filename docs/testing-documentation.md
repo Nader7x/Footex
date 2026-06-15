@@ -54,8 +54,8 @@ Tests for object mapping between domain models and DTOs.
 ### Running Unit Tests
 
 ```bash
-cd D:\programming\GitHub\Footex
-dotnet test Footex.UnitTests/Footex.UnitTests.csproj
+# Run from repository root
+dotnet test ./backend/tests/Footex.UnitTests/Footex.UnitTests.csproj
 ```
 
 ## Integration Tests
@@ -92,8 +92,8 @@ Tests for identity system, JWT token generation, and authorization policies.
 ### Running Integration Tests
 
 ```bash
-cd D:\programming\GitHub\Footex
-dotnet test Footex.IntegrationTests/Footex.IntegrationTests.csproj
+# Run from repository root (requires Docker configured, e.g., WSL 2 or TCP daemon)
+dotnet test ./backend/tests/Footex.IntegrationTests/Footex.IntegrationTests.csproj
 ```
 
 ## Performance Tests
@@ -119,8 +119,11 @@ The following areas are tested for performance:
 ### Running Performance Tests
 
 ```bash
-cd D:\programming\GitHub\Footex
-dotnet run -c Release --project Footex.PerformanceTests/Footex.PerformanceTests.csproj
+# Run NBomber performance load tests from repository root:
+dotnet test ./backend/tests/Footex.PerformanceTests/Footex.PerformanceTests.csproj --configuration Release
+
+# Or run micro-benchmarks via CLI:
+dotnet run --project ./backend/tests/Footex.PerformanceTests/Footex.PerformanceTests.csproj --configuration Release -- all
 ```
 
 ## Test Results

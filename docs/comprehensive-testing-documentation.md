@@ -1,7 +1,7 @@
 # Comprehensive Testing Documentation - Footex Football Management API
 
 **Project**: Footex - Football Management API  
-**Framework**: .NET 8  
+**Framework**: .NET 10  
 **Date**: June 2025  
 **Testing Strategy**: Three-Layer Testing Approach
 
@@ -648,4 +648,4 @@ This testing suite provides strong evidence of software quality, reliability, an
 
 *Documentation generated: June 2025*  
 *Project: Footex Football Management API*  
-*Testing Framework: .NET 8 with XUnit, NBomber, and BenchmarkDotNet*
+*Testing Framework: .NET 10 with XUnit, NBomber, and BenchmarkDotNet*

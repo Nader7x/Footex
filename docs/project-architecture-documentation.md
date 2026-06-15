@@ -16,7 +16,7 @@
 
 ## 🎯 Overview
 
-Footex is a comprehensive football management platform built using Clean Architecture principles with .NET 8. The project implements a layered architecture that promotes separation of concerns, testability, and maintainability while providing a robust foundation for scalable football management operations.
+Footex is a comprehensive football management platform built using Clean Architecture principles with .NET 10. The project implements a layered architecture that promotes separation of concerns, testability, and maintainability while providing a robust foundation for scalable football management operations.
 
 The system manages football teams, players, matches, stadiums, seasons, and provides real-time match simulation capabilities with advanced analytics and caching mechanisms.
 
@@ -931,7 +931,7 @@ public class TeamsController : ControllerBase
 
 ### Backend Technologies
 
-- **.NET 8**: Latest LTS version with performance improvements
+- **.NET 10**: Latest LTS version with performance improvements
 - **ASP.NET Core**: Web API framework
 - **Entity Framework Core**: ORM for database operations
 - **MediatR**: Mediator pattern implementation
@@ -1245,7 +1245,7 @@ public class JwtSettings
 ### Prerequisites
 
 - Docker Desktop
-- .NET 8 SDK (for local development)
+- .NET 10 SDK (for local development)
 - PowerShell (for Docker management scripts)
 
 ### Quick Start

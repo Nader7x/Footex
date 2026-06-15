@@ -19,7 +19,7 @@ We will traverse this plan from top to bottom. When a point is implemented or ve
 - [ ] Configure lightweight branch protection for `main`.
 - [x] Align workflow triggers with trunk-based development.
 - [x] Add concurrency to all workflows.
-- [ ] Add path filters so docs-only or unrelated changes skip expensive jobs.
+- [x] Add path filters so docs-only or unrelated changes skip expensive jobs.
 
 ### Completed ahead of sequence
 
@@ -206,9 +206,8 @@ Performance tests are expensive and should not run by default.
 
 ### Triggers
 
-- Weekly schedule.
-- Manual `workflow_dispatch`.
-- PR label such as `performance`.
+- Manual `workflow_dispatch` only (restricted to prevent high billing of Actions execution hours).
+- Supports inputs for `run_mode` (`fast` - 3s per test dry-runs, or `full` - full duration runs) and `test_type` (`all`, `load`, `stress`, `benchmark`).
 
 ### Actions
 
@@ -588,7 +587,7 @@ security-monitoring.yml
   CodeQL, dependency scans, secrets, Trivy, Checkov, Hadolint
 
 performance.yml
-  Weekly/manual/PR label only
+  Manual only (workflow_dispatch with fast/full run modes)
   Load, stress, benchmark, report
 
 deploy.yml
