@@ -1,5 +1,5 @@
 name: Performance Tests
-
+# checkov:skip=CKV_GHA_7: Personal project, dynamic inputs are required for workflow testing.
 on:
   workflow_dispatch:
     inputs:
