@@ -8,12 +8,22 @@ namespace Application.Services;
 
 public class AzureBlobStorageService : IFileStorageService
 {
-    private readonly BlobServiceClient _blobServiceClient;
+    private readonly BlobServiceClient? _blobServiceClient;
 
     public AzureBlobStorageService(IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("BlobConnection");
-        _blobServiceClient = new BlobServiceClient(connectionString);
+        if (!string.IsNullOrWhiteSpace(connectionString))
+        {
+            try
+            {
+                _blobServiceClient = new BlobServiceClient(connectionString);
+            }
+            catch
+            {
+                _blobServiceClient = null;
+            }
+        }
     }
 
     public AzureBlobStorageService(BlobServiceClient blobServiceClient)
@@ -23,6 +33,9 @@ public class AzureBlobStorageService : IFileStorageService
 
     async Task<string?> IFileStorageService.UploadImageAsync(IFormFile file, string containerName)
     {
+        if (_blobServiceClient == null)
+            throw new InvalidOperationException("Azure Blob Storage connection string is not configured.");
+
         if (file == null || file.Length == 0)
             throw new ArgumentException("No file was provided");
 
@@ -47,7 +60,7 @@ public class AzureBlobStorageService : IFileStorageService
 
     public async Task DeleteImageAsync(string? imageUrl, string containerName)
     {
-        if (string.IsNullOrEmpty(imageUrl))
+        if (string.IsNullOrEmpty(imageUrl) || _blobServiceClient == null)
             return;
 
         try

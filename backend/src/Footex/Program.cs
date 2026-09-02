@@ -260,6 +260,8 @@ try
     var app = builder.Build();
     app.UseForwardedHeaders();
     app.UseOutputCache();
+    app.ApplyMigrations();
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
@@ -268,7 +270,6 @@ try
         {
             options.WithTitle("Footex API").WithPreferredScheme("Bearer");
         });
-        app.ApplyMigrations();
     }
 
     app.UseHttpsRedirection();

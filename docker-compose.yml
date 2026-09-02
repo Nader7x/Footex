@@ -75,14 +75,14 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=Footex_Api;User Id=postgres;Password=footex_password;Include Error Detail=true;
-      - ConnectionStrings__RemoteRedisConnection=redis:6379
+      - ConnectionStrings__BlobConnection=${BLOB_CONNECTION:-UseDevelopmentStorage=true}
       - RabbitMQ__HostName=rabbitmq
       - RabbitMQ__UserName=footex
       - RabbitMQ__Password=footex_password
       - RabbitMQ__VirtualHost=/
       - RabbitMQ__Port=5672
       - RabbitMQ__QueueName=match_events_queue
-      - RedisCache__LocalConnectionString=redis:6379
+      - RedisCache__ConnectionString=redis:6379,password=footex_redis_password
       - RedisCache__InstanceName=Footex_Prod_
       - RedisCache__DefaultExpirationMinutes=10
       - JWT__Secret=${JWT_SECRET:-your-production-super-secret-key-32-chars-long}

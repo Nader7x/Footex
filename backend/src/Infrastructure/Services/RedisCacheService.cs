@@ -19,6 +19,10 @@ public class RedisCacheService : ICacheService
     private readonly IConnectionMultiplexer _connectionMultiplexer; // Added for direct Redis access
     private readonly ILogger<RedisCacheService> _logger;
     private readonly DistributedCacheEntryOptions _options;
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        ReferenceHandler = ReferenceHandler.Preserve,
+    };
 
     // Circuit breaker pattern properties
     private bool _circuitOpen;
@@ -66,7 +70,7 @@ public class RedisCacheService : ICacheService
                 return null;
 
             ResetCircuitBreaker(); // Successful operation
-            return JsonSerializer.Deserialize<T>(cachedValue);
+            return JsonSerializer.Deserialize<T>(cachedValue, JsonOptions);
         }
         catch (Exception ex)
         {
@@ -103,15 +107,11 @@ public class RedisCacheService : ICacheService
 
         try
         {
-            var jsonOptions = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-            };
             var options = expiration.HasValue
                 ? new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiration }
                 : _options;
 
-            var serializedValue = JsonSerializer.Serialize(value , jsonOptions);
+            var serializedValue = JsonSerializer.Serialize(value, JsonOptions);
             await _cache.SetStringAsync(key, serializedValue, options, cancellationToken);
 
             ResetCircuitBreaker(); // Successful operation
